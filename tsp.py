@@ -7,8 +7,8 @@ import os
 # Parámetros del Algoritmo Genético
 tamaño_poblacion = 100
 tasa_cruce = 0.8
-tasa_mutacion = 0.1
-generaciones = 500
+tasa_mutacion = 0.05
+generaciones = 200
 
 # Función para leer las coordenadas desde el CSV
 def leer_ciudades_desde_csv(nombre_archivo):
@@ -154,9 +154,18 @@ if __name__ == "__main__":
 
     # Ejecutar el algoritmo genético
     mejor_ruta, mejor_distancia, generaciones_usadas = algoritmo_genetico(matriz_distancias)
-    print(f"\nMejor Ruta: {mejor_ruta}")
-    print(f"Distancia Total de la Mejor Ruta: {mejor_distancia}")
+    print(f"\nMejor Ruta en Orden:")
+    for i, ciudad in enumerate(mejor_ruta):
+        print(f"  Ciudad {ciudad} -> ", end="")
+    print(f"Ciudad {mejor_ruta[0]}")  # Volver al inicio para cerrar el ciclo
+
+    print(f"\nDistancia Total de la Mejor Ruta: {mejor_distancia}")
     print(f"Generaciones Usadas: {generaciones_usadas}")
+
+    # Mostrar la matriz de distancias
+    print("\nMatriz de Distancias:")
+    for fila in matriz_distancias:
+        print("  ".join(f"{dist:.2f}" for dist in fila))
 
     # Visualizar la solución final con la mejor ruta resaltada
     visualizar_grafo(ciudades, matriz_distancias, mejor_ruta, mejor_distancia, generaciones_usadas)
